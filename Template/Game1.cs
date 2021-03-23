@@ -11,8 +11,11 @@ namespace Template
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D pixel;
-        public Vector2 PixelPos = new Vector2(100, 300);
+        Texture2D Board;
+        Vector2 boardPos = new Vector2(300, 800);
+        Texture2D Ball;
+        Vector2 BallPos = new Vector2(100, 100);
+        Player player;
         //KOmentar
         public Game1()
         {
@@ -43,8 +46,9 @@ namespace Template
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            pixel = Content.Load<Texture2D>("pixel");
-
+            Board = Content.Load<Texture2D>("Board");
+            Ball = Content.Load<Texture2D>("Ball");
+            player = new Player();
             // TODO: use this.Content to load your game content here 
         }
 
@@ -67,6 +71,8 @@ namespace Template
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            player.Update();
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -80,7 +86,8 @@ namespace Template
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(pixel,new Rectangle(100,100,100,100), Color.White);
+            spriteBatch.Draw(Board, boardPos, Color.White);
+            spriteBatch.Draw(Ball, BallPos, Color.White);
             spriteBatch.End();
 
             // TODO: Add your drawing code here.
