@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,16 @@ using System.Threading.Tasks;
 
 namespace Template
 {
-    class Player : Basklass
+   public class Player : Sprite
     {
-        Vector2 boardPos = new Vector2(300, 800);
-        KeyboardState oldKState;
-        public override void Update()
+     public Player(Texture2D texture) : base(texture)
         {
-            KeyboardState kstate = Keyboard.GetState();
-            if (kstate.IsKeyDown(Keys.Right))
-                boardPos.X += 10;
-            if (kstate.IsKeyDown(Keys.Left))
-                boardPos.X -= 10;
+            speed = 5f;
+        }
 
-
+        public override void Update(GameTime gameTime, List<Sprite> sprites)
+        {
+            base.Update(gameTime, sprites);
         }
     }
 }
